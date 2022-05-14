@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.youryun.mapper.YunFileMapper">
+<!--   id有AUTO_INCREMENT约束 我们只需要将主键设置为null，0或者不设置该字段，数据库就会为我们自动生成一个主键值。so在插入式默认0就行了-->
+    <insert id="addFile" parameterType="com.example.youryun.pojo.YunFile" >
+        insert into file(id,user_name,file_name,file_path,file_size,file_type,state,isDir,add_data)
+        values(#{id},#{user_name},#{file_name},#{file_path},#{file_size},#{file_type},#{state},#{isDir},#{add_data})
+    </insert>
+
+
+</mapper>

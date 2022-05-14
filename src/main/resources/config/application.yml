@@ -1,0 +1,28 @@
+#1.端口号配置
+server:
+  port: 8082
+#2.整合mysql数据库
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/gene? useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+    username: root
+    password: fkyourdogss22
+#3.日期格式调整
+  mvc:
+    format:
+      date: YYYY-MM-DD
+
+    hiddenmethod:
+      filter:
+        enable=true:
+# 整合mybatis
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+#logback配置
+#logging:
+#  config: classpath:config/logback-spring.xml
+#  file:
+#    path: I:\myYunPan\logs
+
+
