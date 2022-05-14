@@ -39,7 +39,7 @@ public class YunFileController {
     public void toUpLoadFile(@RequestParam("toUploadFile") MultipartFile uploadFile,
                              @RequestParam("toUploadUser") String username,
                              HttpServletRequest req){
-            //服务器保存路径
+            //服务器保存路径所有文件均保存在这
             String storagePath = "I:\\myYunStoragePath\\"+username+"\\";
             //这是保存到服务器的相对路径，可以实现在线浏览
             //String realPath = req.getSession().getServletContext().getRealPath("\\upload\\");
