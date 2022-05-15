@@ -19,7 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -94,11 +96,12 @@ public class YunFileController {
     * 2022/5/15
     * 功能:文件展示*/
     @GetMapping("/toShowFiles")
-    public ModelAndView toShowFiles(@RequestParam("parentPath") String parentPath,
+    public ModelAndView toShowFiles(@RequestParam("presentPath") String presentPath,
                                     ModelAndView mv){
-        YunFile[] yunFiles=null;
-        yunFiles=yunFileService.showFiles(parentPath);
+        List<YunFile> yunFiles = new ArrayList<>();
+        yunFiles=yunFileService.showFiles(presentPath);
         for(YunFile yunFile:yunFiles){
+            //yunFiles.add(yunFile);
             System.out.println(yunFile.toString());
         }
         mv.addObject("files",yunFiles);

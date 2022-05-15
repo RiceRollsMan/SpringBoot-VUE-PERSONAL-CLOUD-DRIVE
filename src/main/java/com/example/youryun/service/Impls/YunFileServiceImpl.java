@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @Service
 public class YunFileServiceImpl implements YunFileService {
 
@@ -57,8 +60,18 @@ public class YunFileServiceImpl implements YunFileService {
     *2022/5/15
     * 展示文件*/
     @Override
-    public YunFile[] showFiles(String parentPath) {
-        return yunFileMapper.showFiles(parentPath);
+    public List<YunFile> showFiles(String presentPath) {
+        List<YunFile> allYunFiles =  yunFileMapper.showFiles(presentPath);//此时返回的是该路径下所有的文件，不仅限于一级
+        //此时还要进行的是筛选就是筛选出只有一级目录的。
+        /*
+        * 1.进行分割 把presentPath后面的部分提出来*/
+        List<YunFile> yunFiles = new ArrayList<>();
+        for(YunFile yunFile:allYunFiles){
+            if(yunFile.getFile_path().split("/").length-presentPath.split("/").length==1){//这个就是筛选到了满足一级条件的对象
+                yunFiles.add(yunFile);
+            }
+        }
+        return yunFiles;
     }
     /*
     * 2022/5/15

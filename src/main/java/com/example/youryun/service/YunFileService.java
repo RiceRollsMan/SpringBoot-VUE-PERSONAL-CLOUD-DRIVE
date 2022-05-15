@@ -3,6 +3,8 @@ package com.example.youryun.service;
 import com.example.youryun.pojo.YunFile;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface YunFileService {
     /*
@@ -27,7 +29,7 @@ public interface YunFileService {
     /*
     * 2022/5/15
     * 展示文件*/
-    public YunFile[] showFiles(String parentPath);
+    public List<YunFile> showFiles(String presentPath);
     /*
     * 2022/5/15
     * 通过id获取到文件目录进而对其进行下载*/

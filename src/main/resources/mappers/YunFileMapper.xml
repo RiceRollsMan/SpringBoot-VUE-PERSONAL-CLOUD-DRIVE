@@ -10,7 +10,7 @@
     </insert>
     <select id="showFiles" resultType="com.example.youryun.pojo.YunFile">
 <!--        &lt;!&ndash;   想知道这里sql语句为什么这么写嘛。额，试出来的。-->
-        select * from file where file_path like concat(concat(#{parentPath},'%'),'/')
+        select * from file where file_path like concat(#{presentPath},'%');
     </select>
     <select id="downloadFile" resultType="com.example.youryun.pojo.YunFile">
         select * from file where id = #{id}
