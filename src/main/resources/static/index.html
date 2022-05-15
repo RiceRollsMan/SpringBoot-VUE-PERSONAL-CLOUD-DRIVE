@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,5 +10,15 @@
     <input type="text" name="toUploadUser" value="ft">
     <input type="submit" value="上传">
 </form>
+
+<form action="/toShowFiles" method="get" enctype="multipart/form-data">
+    <input type="text" name="parentPath" value="I:/myYunStoragePath/ft">
+    <input type="submit" value="查看">
+</form>
+<form action="/toDownLoadFile" method="get" enctype="multipart/form-data">
+    <input type="text" name="id" >
+    <input type="submit" value="查看">
+</form>
+
 </body>
 </html>

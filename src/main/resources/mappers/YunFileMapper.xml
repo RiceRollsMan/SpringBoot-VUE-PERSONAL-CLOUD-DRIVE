@@ -8,6 +8,12 @@
         insert into file(id,user_name,file_name,file_path,file_size,file_type,state,isDir,add_data)
         values(#{id},#{user_name},#{file_name},#{file_path},#{file_size},#{file_type},#{state},#{isDir},#{add_data})
     </insert>
-
+    <select id="showFiles" resultType="com.example.youryun.pojo.YunFile">
+<!--        &lt;!&ndash;   想知道这里sql语句为什么这么写嘛。额，试出来的。-->
+        select * from file where file_path like concat(concat(#{parentPath},'%'),'/')
+    </select>
+    <select id="downloadFile" resultType="com.example.youryun.pojo.YunFile">
+        select * from file where id = #{id}
+    </select>
 
 </mapper>

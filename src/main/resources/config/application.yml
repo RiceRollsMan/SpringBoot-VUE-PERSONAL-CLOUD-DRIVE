@@ -12,10 +12,6 @@ spring:
   mvc:
     format:
       date: YYYY-MM-DD
-
-    hiddenmethod:
-      filter:
-        enable=true:
 # 整合mybatis
 mybatis:
   mapper-locations: classpath:mappers/*.xml
@@ -24,5 +20,3 @@ mybatis:
 #  config: classpath:config/logback-spring.xml
 #  file:
 #    path: I:\myYunPan\logs
-
-

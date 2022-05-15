@@ -1,5 +1,6 @@
 package com.example.youryun.service;
 
+import com.example.youryun.pojo.YunFile;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,4 +24,12 @@ public interface YunFileService {
                         String file_path,
                         String file_size,
                         String file_type);
+    /*
+    * 2022/5/15
+    * 展示文件*/
+    public YunFile[] showFiles(String parentPath);
+    /*
+    * 2022/5/15
+    * 通过id获取到文件目录进而对其进行下载*/
+    public YunFile downloadFile(int id);//通过id拿到对于的数据库中的文件信息 file_path
 }

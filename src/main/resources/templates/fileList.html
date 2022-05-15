@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr th:each="file:${files}">
+        <td th:text="${file.id}"></td>
+        <td th:text="${file.user_name}"></td>
+        <td th:text="${file.file_name}"></td>
+        <td th:text="${file.file_path}"></td>
+        <td th:text="${file.file_size}"></td>
+        <td th:text="${file.file_type}"></td>
+        <td th:text="${file.state}"></td>
+        <td th:text="${file.add_data}"></td>
+    </tr>
+</table>
+</body>
+</html>

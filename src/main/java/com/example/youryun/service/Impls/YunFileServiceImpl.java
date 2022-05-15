@@ -52,4 +52,20 @@ public class YunFileServiceImpl implements YunFileService {
         //调用mapper进行数据库的insert
         yunFileMapper.addFile(yunFile);
     }
+
+    /*
+    *2022/5/15
+    * 展示文件*/
+    @Override
+    public YunFile[] showFiles(String parentPath) {
+        return yunFileMapper.showFiles(parentPath);
+    }
+    /*
+    * 2022/5/15
+    * 下载文件
+    * */
+    @Override
+    public YunFile downloadFile(int id) {
+        return yunFileMapper.downloadFile(id);
+    }
 }
