@@ -81,4 +81,54 @@ public class YunFileServiceImpl implements YunFileService {
     public YunFile downloadFile(int id) {
         return yunFileMapper.downloadFile(id);
     }
+
+
+    /*
+     * 2022/5/16
+     *
+     * 1.不需要id 默认为0
+     * 2.需要user_name 即文件所有人
+     * 3.需要file_name，即 文件夹名字
+     * 4.需要file_path
+     * 5.不需要file_size
+     * 6.不需要file_type 默认为null
+     * 7.不需要state 1
+     * 8.不需要isDir 默认为1
+     * 9.不需要add_data
+     * 创建一个文件夹*/
+
+    public void makeFolder(String user_name,
+                           String file_name,
+                           String file_path)
+    {
+        //某些参数的定义
+        Integer id = 0;//默认为0嘛。具体原因请看pojo层。
+        Integer state = 1;//上传文件的时候，文件状态默认为1(正常)。
+        Integer isDir=1;//能上传的都不是文件夹。So 默认为1.
+        Date add_data=new Date();//上传文件的时候，上传时间默认为当前时间
+        String file_type="";
+        String file_size=""+0;
+        //YunFile对象封装
+        YunFile yunFile=new YunFile(id,//id默认为0，数据库实现主键自增长
+                user_name,
+                file_name,
+                file_path,
+                file_size,
+                file_type,
+                state,
+                isDir,
+                add_data
+        );
+        //调用mapper进行数据库的insert
+        yunFileMapper.makeFolder(yunFile);
+    }
+    /*2022/5/16
+    * 根据folderId拿到路径*/
+    public String getFolderPath(int id){
+        return yunFileMapper.getFolderPath(id);
+    }
+    /*2022/5/17*/
+    public void throwInBin(int id){
+        yunFileMapper.throwInBin(yunFileMapper.getFolderPath(id));
+    }
 }

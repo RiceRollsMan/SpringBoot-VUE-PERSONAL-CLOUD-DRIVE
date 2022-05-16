@@ -12,4 +12,7 @@ public interface YunFileMapper {
     public void addFile(YunFile yunFile);//添加一个文件
     public List<YunFile> showFiles(String presentPath);//通过parent路径找到该路径下的一级文件，而且返回整个YunFile文件。
     public YunFile downloadFile(int id);//通过id拿到对于的数据库中的文件信息 file_path
+    public void makeFolder(YunFile yunFile);//创建一个文件夹
+    public String getFolderPath(int id);//根据folder的id拿到他的路径
+    public void throwInBin(String filePath);//根据id,拿到他的路径，并且这个路径下的所有都set=0.当然用like咯。而且要用连表哦哦哦哦哦哦哦（这里为了让sql语句更加方便，所以搞个中间商）
 }

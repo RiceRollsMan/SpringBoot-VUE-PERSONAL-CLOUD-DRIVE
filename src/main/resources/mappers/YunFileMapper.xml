@@ -10,10 +10,21 @@
     </insert>
     <select id="showFiles" resultType="com.example.youryun.pojo.YunFile">
 <!--        &lt;!&ndash;   想知道这里sql语句为什么这么写嘛。额，试出来的。-->
-        select * from file where file_path like concat(#{presentPath},'%');
+        select * from file where state=1 and file_path like concat(#{presentPath},'%') order by  isDir desc;
     </select>
     <select id="downloadFile" resultType="com.example.youryun.pojo.YunFile">
         select * from file where id = #{id}
     </select>
+    <insert id="makeFolder" parameterType="com.example.youryun.pojo.YunFile" >
+        insert into file(id,user_name,file_name,file_path,file_size,file_type,state,isDir,add_data)
+        values(#{id},#{user_name},#{file_name},#{file_path},#{file_size},#{file_type},#{state},#{isDir},#{add_data})
+    </insert>
+    <select id="getFolderPath" resultType="String">
+        select file_path from file where id = #{id}
+    </select>
+    <update id="throwInBin">
+        update file set state=0 where id in (select id from (select * from file where file_path like concat(#{filePath},'%')) as b);
+--  update file set state=0 where id in (select id from (select * from file where file_path like 'I:/myYunStoragePath/ft/9fb8715c-1b14-4d50-addc-96b5d92aeaa4/%') as b);
+    </update>
 
 </mapper>

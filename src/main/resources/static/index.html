@@ -12,12 +12,17 @@
 </form>
 
 <form action="/toShowFiles" method="get" enctype="multipart/form-data">
-    <input type="text" name="presentPath" value="I:/myYunStoragePath/ft/%/">
+    <input type="text" name="presentPath" value="I:/myYunStoragePath/ft/">
     <input type="submit" value="查看">
 </form>
 <form action="/toDownLoadFile" method="get" enctype="multipart/form-data">
     <input type="text" name="id" >
     <input type="submit" value="下载">
+</form>
+<p>创建一个文件夹</p>
+<form action="/toMakeFolder" method="post">
+    <input type="text" name="folderName" placeholder="请输入文件夹名">
+    <button type="submit">创建</button>
 </form>
 
 </body>

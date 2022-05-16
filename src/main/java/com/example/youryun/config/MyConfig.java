@@ -3,6 +3,8 @@ package com.example.youryun.config;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -27,3 +29,4 @@ class Exception {
         out.close();
     }
 }
+
