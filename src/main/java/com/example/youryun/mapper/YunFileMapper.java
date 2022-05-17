@@ -15,4 +15,5 @@ public interface YunFileMapper {
     public void makeFolder(YunFile yunFile);//创建一个文件夹
     public String getFolderPath(int id);//根据folder的id拿到他的路径
     public void throwInBin(String filePath);//根据id,拿到他的路径，并且这个路径下的所有都set=0.当然用like咯。而且要用连表哦哦哦哦哦哦哦（这里为了让sql语句更加方便，所以搞个中间商）
+    public void changeFileName(int id,String newFileName);//根据id的去修改文件名字，sure后缀不能改变。所以要在survice层做一点操作。
 }

@@ -26,5 +26,8 @@
         update file set state=0 where id in (select id from (select * from file where file_path like concat(#{filePath},'%')) as b);
 --  update file set state=0 where id in (select id from (select * from file where file_path like 'I:/myYunStoragePath/ft/9fb8715c-1b14-4d50-addc-96b5d92aeaa4/%') as b);
     </update>
+    <update id="changeFileName">
+        update file set file_name=#{newFileName} where id=#{id}
+    </update>
 
 </mapper>

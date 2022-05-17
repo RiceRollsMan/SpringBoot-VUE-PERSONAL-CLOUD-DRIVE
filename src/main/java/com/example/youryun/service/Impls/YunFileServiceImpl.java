@@ -127,8 +127,16 @@ public class YunFileServiceImpl implements YunFileService {
     public String getFolderPath(int id){
         return yunFileMapper.getFolderPath(id);
     }
-    /*2022/5/17*/
+    /*2022/5/17
+    * 删除文件*/
     public void throwInBin(int id){
         yunFileMapper.throwInBin(yunFileMapper.getFolderPath(id));
+    }
+
+    /*2022/5/17
+     * 修改文件名*/
+    public void changeFileName(int id,String newFileName,String file_type) {
+        newFileName=newFileName+file_type;//拼接后缀
+        yunFileMapper.changeFileName(id,newFileName);
     }
 }

@@ -49,46 +49,93 @@ public class YunFileController {
     * 参数2 upLoadUser-->username
     * 注意：这里的分隔符全部采用 / 而不是 \\ 为了方便数据库对于路径的模糊查询
     * */
-    @PostMapping("/toUploadFile")
-    public void toUpLoadFile(@RequestParam("toUploadFile") MultipartFile uploadFile,
-                             @RequestParam("toUploadUser") String username,
-                             HttpServletRequest req){
-            //服务器保存路径所有文件均保存在这
-            String storagePath = "I:/myYunStoragePath/"+"ft"+"/";
-            //这是保存到服务器的相对路径，可以实现在线浏览
-            //String realPath = req.getSession().getServletContext().getRealPath("\\upload\\");
+//    @ResponseBody
+//    @PostMapping("/toUploadFile")
+//    public void toUpLoadFile(@RequestParam("toUploadFile") MultipartFile uploadFile,
+//                             @RequestParam("toUploadUser") String username,
+//                             HttpServletRequest req){
+//            //服务器保存路径所有文件均保存在这
+//            String storagePath = "I:/myYunStoragePath/"+"ft"+"/";
+//            //这是保存到服务器的相对路径，可以实现在线浏览
+//            //String realPath = req.getSession().getServletContext().getRealPath("\\upload\\");
+//
+//            //根据日期去命名存储文件夹
+////            String date = sdf1.format(new Date());
+////            File folder = new File(storagePath + date);
+//
+//            //oldName获取到被上传文件的名字
+//            String oldName=uploadFile.getOriginalFilename();
+//            //通过oldName去获取到该文件的类型。
+//            String fileType=oldName.substring(oldName.lastIndexOf("."),oldName.length());
+//            /*与上面的区别，上面那个会保存. 这个只有文件后缀*/
+////            String fileType=oldName.substring(oldName.lastIndexOf(".")+1,oldName.length());
+//            //newName通过字符串拼接的模式
+//            //UUID可以看成生成一个唯一的名字。
+//            String newName= UUID.randomUUID().toString()+ fileType;
+//
+//            //这个时候就利用springboot的工具类在服务器上进行存储了。
+//            String filePath="";
+//            try{
+//                uploadFile.transferTo(new File(storagePath,newName));//transferto()方法，是springmvc封装的方法，把文件写入磁盘。
+//                filePath=storagePath + newName;//文件绝对路径
+//                System.out.println(filePath);
+//            }
+//            catch (IOException e){
+//            }
+//            //调用service
+//            String user_name=username;
+//            String file_name=oldName;
+//            String file_path=filePath;
+//            String file_size=""+uploadFile.getSize();
+//            String file_type=fileType;
+//            yunFileService.addFile(user_name,file_name,file_path,file_size,file_type);
+//            //这里会报错，因为暂时没有return值，且前面是form需要跳转哦。
+//    }
 
-            //根据日期去命名存储文件夹
+    /*vue版文件上传*/
+    @ResponseBody
+    @PostMapping("/toUploadFile")
+    public List<YunFile> toUpLoadFile(@RequestBody @RequestParam("uploadFile") MultipartFile uploadFile,
+                             @RequestBody @RequestParam("presentPath") String presentPath,
+                             HttpServletRequest req){
+        //服务器保存路径所有文件均保存在这
+        System.out.println(presentPath);
+        String storagePath = presentPath;
+        //这是保存到服务器的相对路径，可以实现在线浏览
+        //String realPath = req.getSession().getServletContext().getRealPath("\\upload\\");
+
+        //根据日期去命名存储文件夹
 //            String date = sdf1.format(new Date());
 //            File folder = new File(storagePath + date);
 
-            //oldName获取到被上传文件的名字
-            String oldName=uploadFile.getOriginalFilename();
-            //通过oldName去获取到该文件的类型。
-            String fileType=oldName.substring(oldName.lastIndexOf("."),oldName.length());
-            /*与上面的区别，上面那个会保存. 这个只有文件后缀*/
+        //oldName获取到被上传文件的名字
+        String oldName=uploadFile.getOriginalFilename();
+        //通过oldName去获取到该文件的类型。
+        String fileType=oldName.substring(oldName.lastIndexOf("."),oldName.length());
+        /*与上面的区别，上面那个会保存. 这个只有文件后缀*/
 //            String fileType=oldName.substring(oldName.lastIndexOf(".")+1,oldName.length());
-            //newName通过字符串拼接的模式
-            //UUID可以看成生成一个唯一的名字。
-            String newName= UUID.randomUUID().toString()+ fileType;
+        //newName通过字符串拼接的模式
+        //UUID可以看成生成一个唯一的名字。
+        String newName= UUID.randomUUID().toString()+ fileType;
 
-            //这个时候就利用springboot的工具类在服务器上进行存储了。
-            String filePath="";
-            try{
-                uploadFile.transferTo(new File(storagePath,newName));//transferto()方法，是springmvc封装的方法，把文件写入磁盘。
-                filePath=storagePath + newName;//文件绝对路径
-                System.out.println(filePath);
-            }
-            catch (IOException e){
-            }
-            //调用service
-            String user_name=username;
-            String file_name=oldName;
-            String file_path=filePath;
-            String file_size=""+uploadFile.getSize();
-            String file_type=fileType;
-            yunFileService.addFile(user_name,file_name,file_path,file_size,file_type);
-            //这里会报错，因为暂时没有return值，且前面是form需要跳转哦。
+        //这个时候就利用springboot的工具类在服务器上进行存储了。
+        String filePath="";
+        try{
+            uploadFile.transferTo(new File(storagePath,newName));//transferto()方法，是springmvc封装的方法，把文件写入磁盘。
+            filePath=storagePath + newName;//文件绝对路径
+            System.out.println(filePath);
+        }
+        catch (IOException e){
+        }
+        //调用service
+        String user_name=username;
+        String file_name=oldName;
+        String file_path=filePath;
+        String file_size=""+uploadFile.getSize();
+        String file_type=fileType;
+        yunFileService.addFile(user_name,file_name,file_path,file_size,file_type);
+        //这里会报错，因为暂时没有return值，且前面是form需要跳转哦。
+        return toShowFiles(presentPath);
     }
 
     /*
@@ -275,6 +322,20 @@ public class YunFileController {
     public List<YunFile> toThrowInBin(@RequestParam("id")int id,
                                       @RequestParam("presentPath")String presentPath){
         yunFileService.throwInBin(id);
+        return toShowFiles(presentPath);
+    }
+
+    /*
+    * 2022/5/17
+    * 修改文件名*/
+    @ResponseBody
+    @GetMapping("/toChangeFileName")
+    public List<YunFile> toChangeFileName(@RequestParam("id") int id,
+                                          @RequestParam("newFileName") String newFileName,
+                                          @RequestParam("fileType") String fileType,
+                                          @RequestParam("presentPath")String presentPath){
+        yunFileService.changeFileName(id,newFileName,fileType);
+        System.out.println("ja");
         return toShowFiles(presentPath);
     }
 

@@ -49,4 +49,8 @@ public interface YunFileService {
     * 2022/5/17
     * 扔进回收站*/
     public void throwInBin(int id);//根据ID
+
+    /*2022/5/17
+    * 修改文件名*/
+    public void changeFileName(int id,String newFileName,String file_type);//这里要根据后缀名去拼名字
 }
