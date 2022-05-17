@@ -23,8 +23,8 @@
         select file_path from file where id = #{id}
     </select>
     <update id="throwInBin">
-        update file set state=0 where id in (select id from (select * from file where file_path like concat(#{filePath},'%')) as b);
---  update file set state=0 where id in (select id from (select * from file where file_path like 'I:/myYunStoragePath/ft/9fb8715c-1b14-4d50-addc-96b5d92aeaa4/%') as b);
+-- 这里只改自己的哦!
+        update file set state=0 where file_path=#{file_path}
     </update>
     <update id="changeFileName">
         update file set file_name=#{newFileName} where id=#{id}
