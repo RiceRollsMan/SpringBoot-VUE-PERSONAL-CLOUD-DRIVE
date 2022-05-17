@@ -66,6 +66,33 @@ public class YunFileServiceImpl implements YunFileService {
         /*
         * 1.进行分割 把presentPath后面的部分提出来*/
         List<YunFile> yunFiles = new ArrayList<>();
+        for(YunFile yunFile:showNormalFiles(presentPath))
+            yunFiles.add(yunFile);//先加正常的
+        for(YunFile yunFile:showDeletedFiles(presentPath))
+            yunFiles.add(yunFile);//再加已经被删了的，ok不
+        return yunFiles;
+    }
+    @Override
+    public List<YunFile> showNormalFiles(String presentPath) {
+        List<YunFile> allYunFiles =  yunFileMapper.showNormalFiles(presentPath);//此时返回的是该路径下所有的文件，不仅限于一级
+        //此时还要进行的是筛选就是筛选出只有一级目录的。
+        /*
+        * 1.进行分割 把presentPath后面的部分提出来*/
+        List<YunFile> yunFiles = new ArrayList<>();
+        for(YunFile yunFile:allYunFiles){
+            if(yunFile.getFile_path().split("/").length-presentPath.split("/").length==1){//这个就是筛选到了满足一级条件的对象
+                yunFiles.add(yunFile);
+            }
+        }
+        return yunFiles;
+    }
+    @Override
+    public List<YunFile> showDeletedFiles(String presentPath) {
+        List<YunFile> allYunFiles =  yunFileMapper.showDeletedFiles(presentPath);//此时返回的是该路径下所有的文件，不仅限于一级
+        //此时还要进行的是筛选就是筛选出只有一级目录的。
+        /*
+        * 1.进行分割 把presentPath后面的部分提出来*/
+        List<YunFile> yunFiles = new ArrayList<>();
         for(YunFile yunFile:allYunFiles){
             if(yunFile.getFile_path().split("/").length-presentPath.split("/").length==1){//这个就是筛选到了满足一级条件的对象
                 yunFiles.add(yunFile);

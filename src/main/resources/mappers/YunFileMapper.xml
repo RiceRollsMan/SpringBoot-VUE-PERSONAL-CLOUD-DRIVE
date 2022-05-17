@@ -12,6 +12,14 @@
 <!--        &lt;!&ndash;   想知道这里sql语句为什么这么写嘛。额，试出来的。-->
         select * from file where state=1 and file_path like concat(#{presentPath},'%') order by  isDir desc;
     </select>
+    <select id="showNormalFiles" resultType="com.example.youryun.pojo.YunFile">
+<!--        &lt;!&ndash;   想知道这里sql语句为什么这么写嘛。额，试出来的。正常的-->
+        select * from file where state=1 and file_path like concat(#{presentPath},'%') order by  isDir desc;
+    </select>
+    <select id="showDeletedFiles" resultType="com.example.youryun.pojo.YunFile">
+<!--        &lt;!&ndash;   想知道这里sql语句为什么这么写嘛。额，试出来的。已经被删了的-->
+        select * from file where state=0 and file_path like concat(#{presentPath},'%') order by  isDir desc;
+    </select>
     <select id="downloadFile" resultType="com.example.youryun.pojo.YunFile">
         select * from file where id = #{id}
     </select>

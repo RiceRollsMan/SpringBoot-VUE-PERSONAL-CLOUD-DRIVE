@@ -29,7 +29,9 @@ public interface YunFileService {
     /*
     * 2022/5/15
     * 展示文件*/
-    public List<YunFile> showFiles(String presentPath);
+    public List<YunFile> showFiles(String presentPath);//这个由下面两个组合完成
+    public List<YunFile> showNormalFiles(String presentPath);
+    public List<YunFile> showDeletedFiles(String presentPath);
     /*
     * 2022/5/15
     * 通过id获取到文件目录进而对其进行下载*/

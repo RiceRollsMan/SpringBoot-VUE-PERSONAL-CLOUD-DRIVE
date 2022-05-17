@@ -11,6 +11,8 @@ import java.util.List;
 public interface YunFileMapper {
     public void addFile(YunFile yunFile);//添加一个文件
     public List<YunFile> showFiles(String presentPath);//通过parent路径找到该路径下的一级文件，而且返回整个YunFile文件。
+    public List<YunFile> showNormalFiles(String presentPath);//state=1的
+    public List<YunFile> showDeletedFiles(String presentPath);//state=0的
     public YunFile downloadFile(int id);//通过id拿到对于的数据库中的文件信息 file_path
     public void makeFolder(YunFile yunFile);//创建一个文件夹
     public String getFolderPath(int id);//根据folder的id拿到他的路径
