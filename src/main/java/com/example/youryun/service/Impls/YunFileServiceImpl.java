@@ -160,6 +160,13 @@ public class YunFileServiceImpl implements YunFileService {
         yunFileMapper.throwInBin(yunFileMapper.getFolderPath(id));
     }
 
+    /*
+     * 2022/5/17
+     * 把已经删除了的恢复*/
+    public void restoreFile(int id){
+        yunFileMapper.restoreFile(id);
+    }
+
     /*2022/5/17
      * 修改文件名*/
     public void changeFileName(int id,String newFileName,String file_type) {

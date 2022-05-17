@@ -325,6 +325,16 @@ public class YunFileController {
     }
 
     /*
+    * 2022/5/17*/
+    @ResponseBody
+    @GetMapping("/toRestoreFile")
+    public List<YunFile> toRestoreFile(@RequestParam("id") int id,
+                                       @RequestParam("presentPath") String presentPath){
+        yunFileService.restoreFile(id);
+        return toShowFiles(presentPath);
+    }
+
+    /*
     * 2022/5/17
     * 修改文件名*/
     @ResponseBody

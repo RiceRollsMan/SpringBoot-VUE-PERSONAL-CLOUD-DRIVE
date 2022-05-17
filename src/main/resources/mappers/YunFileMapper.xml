@@ -37,5 +37,8 @@
     <update id="changeFileName">
         update file set file_name=#{newFileName} where id=#{id}
     </update>
+    <update id="restoreFile">
+        update file set state=1 where id=#{id}
+    </update>
 
 </mapper>
